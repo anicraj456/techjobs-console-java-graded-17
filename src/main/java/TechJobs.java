@@ -7,11 +7,8 @@ import java.util.Scanner;
  * Created by LaunchCode
  */
 public class TechJobs {
-
     static Scanner in = new Scanner(System.in);
-
     public static void main (String[] args) {
-
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
         columnChoices.put("core competency", "Skill");
@@ -19,7 +16,6 @@ public class TechJobs {
         columnChoices.put("location", "Location");
         columnChoices.put("position type", "Position Type");
         columnChoices.put("all", "All");
-
         // Top-level menu options
         HashMap<String, String> actionChoices = new HashMap<>();
         actionChoices.put("search", "Search");
@@ -29,38 +25,28 @@ public class TechJobs {
 
         // Allow the user to search until they manually quit
         while (true) {
-
             String actionChoice = getUserSelection("View jobs by (type 'x' to quit):", actionChoices);
-
             if (actionChoice == null) {
                 break;
             } else if (actionChoice.equals("list")) {
-
                 String columnChoice = getUserSelection("List", columnChoices);
-
                 if (columnChoice.equals("all")) {
                     printJobs(JobData.findAll());
                 } else {
-
                     ArrayList<String> results = JobData.findAll(columnChoice);
-
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
-
                     // Print list of skills, employers, etc
                     for (String item : results) {
                         System.out.println(item);
                     }
                 }
-
             } else { // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
-
                 // What is their search term?
                 System.out.println("\nSearch term:");
                 String searchTerm = in.nextLine();
-
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
@@ -69,14 +55,11 @@ public class TechJobs {
             }
         }
     }
-
     // ﻿Returns the key of the selected item from the choices Dictionary
     private static String getUserSelection(String menuHeader, HashMap<String, String> choices) {
-
         int choiceIdx = -1;
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
-
         // Put the choices in an ordered structure so we can
         // associate an integer with each one
         int i = 0;
@@ -86,14 +69,11 @@ public class TechJobs {
         }
 
         do {
-
             System.out.println("\n" + menuHeader);
-
             // Print available choices
             for (int j = 0; j < choiceKeys.length; j++) {
                 System.out.println("" + j + " - " + choices.get(choiceKeys[j]));
             }
-
             if (in.hasNextInt()) {
                 choiceIdx = in.nextInt();
                 in.nextLine();
@@ -104,7 +84,6 @@ public class TechJobs {
                     return null;
                 }
             }
-
             // Validate user's input
             if (choiceIdx < 0 || choiceIdx >= choiceKeys.length) {
                 System.out.println("Invalid choice. Try again.");
@@ -119,7 +98,18 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if(null != someJobs && !someJobs.isEmpty()){
+            for (HashMap<String, String> row : someJobs) {
+                System.out.println("*****");
+                for (Map.Entry<String, String> set : row.entrySet()) {
+                    System.out.println(set.getKey() + ": "+ set.getValue());
+                }
+                System.out.println("*****\n");
+            }
+        }else{
+            System.out.println("Example Search Term with No Results");
+            System.out.println("No Results");
+        }
 
-        System.out.println("printJobs is not implemented yet");
     }
 }
