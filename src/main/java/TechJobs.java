@@ -107,7 +107,7 @@ public class TechJobs {
                 System.out.println("*****\n");
             }
         }else{
-            System.out.println("Example Search Term with No Results");
+            //System.out.println("Example Search Term with No Results");
             System.out.println("No Results");
         }
 
