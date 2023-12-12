@@ -62,14 +62,13 @@ public class JobData {
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
-
             String aValue = row.get(column);
+            //added lowercase to make it case insensitive
 
             if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
-
         return jobs;
     }
     /**
@@ -125,5 +124,4 @@ public class JobData {
             e.printStackTrace();
         }
     }
-
 }
