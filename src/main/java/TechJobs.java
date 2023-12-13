@@ -108,21 +108,4 @@ public class TechJobs {
         }
 
     }
-
-    private static void printSortedJobs(ArrayList<HashMap<String, String>> someJobs) {
-        if(null != someJobs && !someJobs.isEmpty()){
-            //
-            for (HashMap<String, String> row : someJobs) {
-                System.out.println("\n*****");
-                for (Map.Entry<String, String> set : row.entrySet()) {
-                    System.out.println(set.getKey() + ": "+ set.getValue());
-                }
-                System.out.println("*****");
-            }
-        }else{
-            System.out.print("No Results");
-        }
-
-    }
-
 }
