@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -35,13 +32,14 @@ public class TechJobs {
                 } else {
                     ArrayList<String> results = JobData.findAll(columnChoice);
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
+                    //sorting alphabetically
+                    Collections.sort(results);
                     // Print list of skills, employers, etc
                     for (String item : results) {
                         System.out.println(item);
                     }
                 }
             } else { // choice is "search"
-
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
                 // What is their search term?
@@ -90,26 +88,41 @@ public class TechJobs {
             } else {
                 validChoice = true;
             }
-
         } while(!validChoice);
 
         return choiceKeys[choiceIdx];
     }
-
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
         if(null != someJobs && !someJobs.isEmpty()){
+            //
             for (HashMap<String, String> row : someJobs) {
-                System.out.println("*****");
+                System.out.println("\n*****");
                 for (Map.Entry<String, String> set : row.entrySet()) {
                     System.out.println(set.getKey() + ": "+ set.getValue());
                 }
-                System.out.println("*****\n");
+                System.out.println("*****");
             }
         }else{
-            //System.out.println("Example Search Term with No Results");
-            System.out.println("No Results");
+            System.out.print("No Results");
         }
 
     }
+
+    private static void printSortedJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if(null != someJobs && !someJobs.isEmpty()){
+            //
+            for (HashMap<String, String> row : someJobs) {
+                System.out.println("\n*****");
+                for (Map.Entry<String, String> set : row.entrySet()) {
+                    System.out.println(set.getKey() + ": "+ set.getValue());
+                }
+                System.out.println("*****");
+            }
+        }else{
+            System.out.print("No Results");
+        }
+
+    }
+
 }
